@@ -1,0 +1,42 @@
+{
+    "name": "informaticauco/oauth2-uco",
+    "description": "University of Córdoba client provider to the PHP League OAuth2 client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergio Gómez",
+            "email": "sergio@uco.es"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Uco\\OAuth2\\Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Uco\\OAuth2\\Client\\": "tests/"
+        }
+    },
+    "require": {
+        "league/oauth2-client": "^2.3",
+        "spomky-labs/jose": "^7.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "mockery/mockery": "^1.2",
+        "phpunit/phpunit": "^7.4"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
