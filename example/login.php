@@ -26,7 +26,11 @@ if (empty($_GET['code'])) {
      *
      * Si aún no tenemos un código de autorización, pedimos uno
      */
-    $authUrl = $provider->getAuthorizationUrl();
+    $authUrl = $provider->getAuthorizationUrl([
+        'scope' => [
+            'openid',
+        ],
+    ]);
     $_SESSION['oauth2state'] = $provider->getState();
     header('Location: '.$authUrl);
     exit;

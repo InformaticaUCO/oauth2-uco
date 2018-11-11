@@ -41,5 +41,9 @@ try {
     exit('El error a leer los datos: '.$e->getMessage());
 }
 
+$values = array_map(function ($key, $value) {
+    return ['key' => $key, 'value' => $value];
+}, array_keys($userDetails->toArray()), $userDetails->toArray());
+
 // Renderizamos la página
-echo $template->render('user', ['user' => $userDetails, 'token' => $token]);
+echo $template->render('user', ['id' => $userDetails->getId(), 'values' => $values]);

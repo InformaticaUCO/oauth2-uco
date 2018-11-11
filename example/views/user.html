@@ -9,7 +9,8 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <style>
@@ -40,6 +41,7 @@
         .cover {
             padding: 0 1.5rem;
         }
+
         .cover .btn-lg {
             padding: .75rem 1.25rem;
             font-weight: 700;
@@ -54,7 +56,14 @@
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">¡Bienvenido {{ user.getId }}!</h1>
+        <h1 class="cover-heading">¡Bienvenido {{ id }}!</h1>
+        <hr>
+        <h5 style="text-align: left">Attributos recibidos:</h5>
+        <pre class="data" style="text-align: left">
+{{# values }}
+{{ key }}: {{ value }}
+{{/ values }}
+        </pre>
     </main>
 
     <footer class="mastfoot mt-auto">
