@@ -98,7 +98,7 @@ class Uco extends AbstractProvider
         if (!empty($data['error'])) {
             $code = 0;
             $error = $data['error'];
-            if (is_array($error)) {
+            if (\is_array($error)) {
                 $code = $error['code'];
                 $error = $error['message'];
             }
