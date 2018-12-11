@@ -1,0 +1,28 @@
+{
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergio Gómez",
+            "email": "sergio@uco.es"
+        }
+    ],
+    "require": {
+        "informaticauco/oauth2-uco": "dev-master",
+        "mustache/mustache": "^2.12",
+        "roave/security-advisories": "dev-master",
+        "spomky-labs/jose": "^7.1",
+        "symfony/dotenv": "^4.1"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

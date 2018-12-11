@@ -14,7 +14,7 @@
 use Symfony\Component\Dotenv\Dotenv;
 use Uco\OAuth2\Client\Provider\Uco;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 // Carga la configuración
 $dotenv = new Dotenv();
