@@ -22,12 +22,12 @@
     "require": {
         "ext-curl": "*",
         "league/oauth2-client": "^2.3",
-        "spomky-labs/jose": "^7.1"
+        "web-token/jwt-framework": "^2.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.13",
         "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^7.4"
+        "phpunit/phpunit": "^8.4"
     },
     "config": {
         "preferred-install": {

@@ -16,7 +16,7 @@ namespace Uco\OAuth2\Client\Provider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Tool\ArrayAccessorTrait;
 
-class UcoResourceOwner implements ResourceOwnerInterface
+final class UcoResourceOwner implements ResourceOwnerInterface
 {
     use ArrayAccessorTrait;
 
