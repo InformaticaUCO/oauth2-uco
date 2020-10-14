@@ -13,14 +13,6 @@
 
 namespace Uco\OAuth2\Client\Provider;
 
-use Jose\Component\Core\AlgorithmManager;
-use Jose\Component\KeyManagement\JWKFactory;
-use Jose\Component\Signature\Algorithm\RS256;
-use Jose\Component\Signature\JWS;
-use Jose\Component\Signature\JWSVerifier;
-use Jose\Component\Signature\Serializer\CompactSerializer;
-use Jose\Component\Signature\Serializer\JWSSerializerManager;
-use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
@@ -63,26 +55,6 @@ final class Uco extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function createAccessToken(array $response, AbstractGrant $grant)
-    {
-        $token = parent::createAccessToken($response, $grant);
-        if (!\array_key_exists('id_token', $token->getValues())) {
-            throw new \InvalidArgumentException('Access token does not contains \'id_token\'.');
-        }
-
-        $idToken = $token->getValues()['id_token'];
-        $success = $this->checkJsonWebSignature($idToken);
-
-        if (false === $success) {
-            throw new \RuntimeException('Invalid UCO openid token signature');
-        }
-
-        return $token;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefaultScopes()
     {
         return ['openid'];
@@ -118,66 +90,5 @@ final class Uco extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new UcoResourceOwner($response);
-    }
-
-    /**
-     * @param string $idToken
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @return bool
-     */
-    private function checkJsonWebSignature($idToken)
-    {
-        $jsonWebSignature = $this->getJsonWebSignature($idToken);
-        $jsonWebKeySet = $this->getJsonWebKeySet();
-        $jwsVerifier = $this->getJWSVerifier();
-
-        return $jwsVerifier->verifyWithKeySet($jsonWebSignature, $jsonWebKeySet, 0);
-    }
-
-    /**
-     * @param string $idToken
-     *
-     * @return JWS
-     */
-    private function getJsonWebSignature($idToken)
-    {
-        $serializerManager = new JWSSerializerManager([
-            new CompactSerializer(),
-        ]);
-
-        return $serializerManager->unserialize($idToken);
-    }
-
-    /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @return \Jose\Component\Core\JWK|\Jose\Component\Core\JWKSet
-     */
-    private function getJsonWebKeySet()
-    {
-        $httpClient = $this->getHttpClient();
-        $response = $httpClient->request(
-            'GET',
-            $this->getBaseJsonWebKeyUrl()
-        );
-        $rawJsonWebKeySet = $response->getBody();
-
-        return JWKFactory::createFromJsonObject($rawJsonWebKeySet);
-    }
-
-    /**
-     * @return JWSVerifier
-     */
-    private function getJWSVerifier()
-    {
-        $jwsVerifier = new JWSVerifier(
-            new AlgorithmManager([
-                new RS256(),
-            ])
-        );
-
-        return $jwsVerifier;
     }
 }
